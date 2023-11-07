@@ -12,18 +12,8 @@ class HomeDesign:
 
         for contact in contacts:
             values = (contact.name, contact.last_name, contact.phone_number, contact.email, contact.address,
-                      contact.type_contact, 'Bloqueado@' if contact.blocked else 'Desbloquead@')
+                      'Si' if contact.emergency else 'No', contact.type_contact, 'Bloqueado@' if contact.blocked else 'Desbloquead@')
             self.table.insert('', 'end', text=f'{contact.id}', values=values)
-        # for contact in contacts:
-        #     values = (contact.name,
-        #               contact.last_name if contact.last_name is not None else '',
-        #               contact.phone_number,
-        #               contact.email if contact.email is not None else '',
-        #               contact.address if contact.address is not None else '',
-        #               'Si' if contact.emergency else 'No',
-        #               contact.type_contact,
-        #               'Bloquead@' if contact.blocked else 'Desbloquead@')
-
 
     def init_window(self):
         self.window = tk.Tk()
@@ -92,7 +82,7 @@ class HomeDesign:
         btn_block = tk.Button(data_panel, text='BLOQUEAR', font=('Segoe UI', 10, BOLD), bg='black', padx=30,  fg='white', bd=0, cursor='hand2', command=self.block_contact)
         btn_unblock = tk.Button(data_panel, text='DESBLOQUEAR', font=('Segoe UI', 10, BOLD), bg='#4CAF50', padx=30,  fg='white', bd=0, cursor='hand2', command=self.unblock_contact)
 
-        btn_add.grid(row=1, column=0)
+        btn_add.grid(row=1, column=0, pady=10)
         btn_update.grid(row=1, column=1)
         btn_delete.grid(row=1, column=2)
         btn_block.grid(row=1, column=3)
