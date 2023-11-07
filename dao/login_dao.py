@@ -7,7 +7,7 @@ class LoginDao:
     def __init__(self):
         self.conn = DataBaseConnection()    
         
-    def select_user(self, email, password):
+    def auth_user(self, email, password):
         try:
             cursor = self.conn.connection.cursor()
             query = 'SELECT name, email, password, id FROM users WHERE email = ? AND  password = ?'

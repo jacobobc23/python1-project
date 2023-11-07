@@ -11,16 +11,19 @@ class HomeDesign:
         self.table.delete(*self.table.get_children()) 
 
         for contact in contacts:
-            values = (contact.name,
-                      contact.last_name if contact.last_name is not None else '',
-                      contact.phone_number,
-                      contact.email if contact.email is not None else '',
-                      contact.address if contact.address is not None else '',
-                      'Si' if contact.emergency else 'No',
-                      contact.type_contact,
-                      'Bloquead@' if contact.blocked else 'Desbloquead@')
-
+            values = (contact.name, contact.last_name, contact.phone_number, contact.email, contact.address,
+                      contact.type_contact, 'Bloqueado@' if contact.blocked else 'Desbloquead@')
             self.table.insert('', 'end', text=f'{contact.id}', values=values)
+        # for contact in contacts:
+        #     values = (contact.name,
+        #               contact.last_name if contact.last_name is not None else '',
+        #               contact.phone_number,
+        #               contact.email if contact.email is not None else '',
+        #               contact.address if contact.address is not None else '',
+        #               'Si' if contact.emergency else 'No',
+        #               contact.type_contact,
+        #               'Bloquead@' if contact.blocked else 'Desbloquead@')
+
 
     def init_window(self):
         self.window = tk.Tk()
@@ -52,6 +55,9 @@ class HomeDesign:
 
         all_button = tk.Button(search_panel, text='VER TODOS', font=('Segoe UI', 10, BOLD), padx=30, bg='lightgrey', fg='black', bd=0, cursor='hand2', command=self.show_all_contacts)
         all_button.pack(side='left', padx=10, pady=10)
+        
+        return_to_login = tk.Button(search_panel, text='Cerrar sesión', font=('Segoe UI', 10, BOLD), padx=30, bg='white', fg='red', bd=0, cursor='hand2', command=self.return_to_login)
+        return_to_login.pack(side='right', padx=10, pady=10)
 
         data_panel = tk.Frame(bg_panel, height=50, bd=0, relief=tk.SOLID, bg='white', padx=100)
         data_panel.pack(side='bottom', expand=tk.YES, fill=tk.BOTH)

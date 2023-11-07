@@ -47,10 +47,12 @@ class ContactDao:
         user_contacts = []
         try:
             cursor = self.conn.connection.cursor()
-            query = '''SELECT name, last_name, phone_number, type, email, address, emergency, blocked, id FROM contacts
-                    WHERE name = ? OR last_name = ? OR phone_number = ? OR email = ? OR address = ?'''
+            query = '''SELECT name, last_name, phone_number, type, email, address, emergency, blocked, id 
+                   FROM contacts
+                   WHERE name LIKE ? OR last_name LIKE ? OR phone_number LIKE ? OR email LIKE ? OR address LIKE ?'''
             
-            values = (item, item, item, item, item)
+            value = f'{item}%'
+            values = (value, value, value, value, value)
             cursor.execute(query, values)
             
             contacts_data = cursor.fetchall()

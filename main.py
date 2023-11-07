@@ -1,4 +1,5 @@
 from views.signin import SigninWindow
 
-if __name__ == '__main__':
+# para ejecutar solo si el script se está ejecutando directamente como el programa principal
+if __name__ == '__main__': 
     SigninWindow()

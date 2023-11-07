@@ -24,17 +24,12 @@ class SignupWindow(SignupDesign):
         try:
             user = User(name, email, password)
             self.controller.insert_user(user)
+            
             messagebox.showinfo(message='Registro existoso, bienvenido')
-            self.open_home(user)
+            self.return_to_login()
         except UserAlreadyRegisteredException as ex:
             messagebox.showerror(message=ex)
 
-    def open_home(self, user):
-        from views.home import HomeWindow
-        self.window.destroy()
-        HomeWindow(user)
-        pass
-    
     def return_to_login(self):
         self.window.destroy()
         SigninWindow()

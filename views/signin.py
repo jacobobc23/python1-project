@@ -20,7 +20,7 @@ class SigninWindow(SigninDesign):
             return
 
         try: 
-            user = self.controller.select_user(email, password)
+            user = self.controller.auth_user(email, password)
             self.window.destroy()
             HomeWindow(user)
         except CredentialsException as ex:

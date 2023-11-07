@@ -31,9 +31,13 @@ class HomeWindow(HomeDesign):
         
         if item:
             contact_id = self.table.item(item, 'text')
-            self.controller.delete_contact(contact_id)
-            messagebox.showinfo(message='Contacto eliminado')
-            self.refresh_table()
+            
+            confirm = messagebox.askyesno(message='¿Está seguro de eliminar este contacto?', title='Confirmación')
+            
+            if confirm:
+                self.controller.delete_contact(contact_id)
+                messagebox.showinfo(message='Contacto eliminado')
+                self.refresh_table()
         else:
             messagebox.showwarning(message='Seleccione un contacto', title='Advertencia')
             
@@ -62,15 +66,19 @@ class HomeWindow(HomeDesign):
     def show_all_contacts(self):
         self.refresh_table()
     
+    def return_to_login(self):
+        from views.signin import SigninWindow
+        self.window.destroy()
+        SigninWindow()
+    
     def search_contacts_by_filter(self):
-        atr = self.filter.get()
-        if atr:
-            contacts = self.controller.filter_conctacts(atr)
+        item = self.filter.get()
+        if item:
+            contacts = self.controller.filter_conctacts(item)
             if contacts:
                 self.fill_table(contacts)
             else:
                 messagebox.showerror(message='No se encontraron resultados', title='Advertencia') 
-                self.refresh_table()
         else:
             messagebox.showwarning(message='Ingrese algún dato', title='Advertencia')
     
